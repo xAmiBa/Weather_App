@@ -27,5 +27,5 @@ describe('class WeatherClient', () => {
         const weatherData = await weatherClient.fetchWeatherData('London');
 
         expect(weatherData).toEqual(expected_data);
-        })
-    })
+        });
+    });

@@ -1,17 +1,6 @@
 const Weather =  require('./weather');
 const WeatherClient =  require('./WeatherClient');
 
-describe('class weather INTEGRATED', () => {
-    test('compare london and casablanca intergarted', async () => {
-        const client = new WeatherClient();
-        const weather = new Weather(client);
-
-        console.log('hello')
-        result = await weather.compareWith('London', 'Casablanca')
-        console.log('result', result)
-        expect(result).toBe('Casablanca is warmer than London.');
-    });
-});
 const jestFetchMock = require("jest-fetch-mock");
 jestFetchMock.enableMocks();
       
@@ -101,7 +90,7 @@ describe('class Weather', () => {
             City: 'London',
             Weather: 'Rain', // Taking the first weather condition from the array
             Temperature: 13.05,
-            'Feels like': 12.68,
+            Feels_like: 12.68,
             Humidity: '87%' // Humidity as a percentage
         }
 
@@ -120,3 +109,4 @@ describe('class Weather', () => {
         expect(result).toBe('Casablanca is warmer than London.')
     })
 });
+

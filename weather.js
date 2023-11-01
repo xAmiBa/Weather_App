@@ -14,7 +14,7 @@ class Weather {
             City: this.data.name,
             Weather: this.data.weather[0].main,
             Temperature: this.data.main.temp,
-            'Feels like': this.data.main.feels_like,
+            Feels_like: this.data.main.feels_like,
             Humidity: `${this.data.main.humidity}%`
         }
     }
@@ -29,7 +29,7 @@ class Weather {
         let weather_data_city2 = await this.getWeatherData()
         
         cities_data = [weather_data_city1, weather_data_city2]
-        console.log(cities_data)
+        // console.log(cities_data)
         // console.log('DATA:')
         // console.log(cities_data)
         
@@ -54,17 +54,36 @@ class Weather {
             }
 
         });
-        console.log("line 57")
+        // console.log("line 57")
         return `${warmer_city.City} is warmer than ${colder_city.City}.`
+    }
+    async displayWeather(city) {
+        function printInTwoColumns(leftColumn, rightColumn, columnWidth) {
+            const leftPadding = columnWidth - leftColumn.length;
+            const separator = ' '.repeat(leftPadding);
+        
+            // console.log(leftColumn + separator + rightColumn);
+            return leftColumn + separator + rightColumn;
+        }
+        await this.load(city)
+        const data = this.getWeatherData()
+
+        const result = [];
+        result.push(printInTwoColumns('City:', data.City, 15));
+        result.push(printInTwoColumns('Weather:', data.Weather, 15))
+        result.push(printInTwoColumns('Temparature:', data.Temperature, 15))
+        result.push(printInTwoColumns('Feels like:', data.Feels_like, 15))
+        result.push(printInTwoColumns('Humidity:', data.Humidity, 15))
+        return result.join('\n');
     }
 }
 
 module.exports = Weather;
 
-const WeatherClient =  require('./WeatherClient');
-const client = new WeatherClient();
+// const WeatherClient =  require('./WeatherClient');
+// const client = new WeatherClient();
 
 // const Weather = require('./weather')
-const weather = new Weather(client);
+// const weather = new Weather(client);
 // result1 = await weather.compareWith('London', 'Casablanca');
 // console.log(result1)
